@@ -11,7 +11,7 @@ public class MainActivity extends AppCompatActivity {
 
     TextView response;
     EditText editTextAddress, editTextPort;
-    Button buttonConnect, buttonClear;
+    Button buttonConnect, buttonClear, buttonSend;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
         editTextPort = (EditText) findViewById(R.id.portEditText);
         buttonConnect = (Button) findViewById(R.id.connectButton);
         buttonClear = (Button) findViewById(R.id.clearButton);
+        buttonSend = (Button) findViewById(R.id.sendButton);
         response = (TextView) findViewById(R.id.responseTextView);
 
         buttonConnect.setOnClickListener(new View.OnClickListener() {
@@ -40,6 +41,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 response.setText("");
+            }
+        });
+
+        buttonSend.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+
             }
         });
     }

@@ -3,11 +3,16 @@ package com.example.hang.socketclient;
 import android.os.AsyncTask;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+
 import java.io.ByteArrayOutputStream;
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by hang on 10/13/17.
@@ -33,19 +38,41 @@ public class Client extends AsyncTask<Void, Void, String> {
         try {
             socket = new Socket(dstAddress, dstPort);
 
-            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream(1024);
-            byte[] buffer = new byte[1024];
+//            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream(1024);
+//            byte[] buffer = new byte[1024];
+//
+//            int bytesRead;
+//            InputStream inputStream = socket.getInputStream();
+//
+//			/*
+//             * notice: inputStream.read() will block if no data return
+//			 */
+//            while ((bytesRead = inputStream.read(buffer)) != -1) {
+//                byteArrayOutputStream.write(buffer, 0, bytesRead);
+//                response += byteArrayOutputStream.toString("UTF-8");
+//            }
 
-            int bytesRead;
-            InputStream inputStream = socket.getInputStream();
 
-			/*
-             * notice: inputStream.read() will block if no data return
-			 */
-            while ((bytesRead = inputStream.read(buffer)) != -1) {
-                byteArrayOutputStream.write(buffer, 0, bytesRead);
-                response += byteArrayOutputStream.toString("UTF-8");
+            //send something here
+            Gson gson = new Gson();
+
+            String position = "bedroom";
+            List<Integer> list = new ArrayList<>();
+            list.add(33);
+            list.add(35);
+            list.add(34);
+
+            FingerPrint fingerPrint = new FingerPrint(position, list);
+            String s = gson.toJson(fingerPrint);
+//            String s = "test";
+            DataOutputStream dataOutputStream = new DataOutputStream(socket.getOutputStream());
+            if (dataOutputStream == null) {
+                System.out.print("out is null");
             }
+            dataOutputStream.writeUTF(s);
+            dataOutputStream.flush();
+            dataOutputStream.close();
+
 
         } catch (UnknownHostException e) {
             // TODO Auto-generated catch block

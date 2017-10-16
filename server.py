@@ -1,4 +1,5 @@
 import socket               # Import socket module
+import json
 
 s = socket.socket()         # Create a socket object
 #host = socket.gethostname() # Get local machine name
@@ -11,5 +12,11 @@ while True:
    c, addr = s.accept()     # Establish connection with client.
    print('Got connection from', addr)
    text = 'Thank you for connecting'
-   c.send(text.encode())
+   #size = c.send(text.encode())
+   content = c.recv(1024).decode()
+   print(content)
+   #dict = json.loads(content)
+   #strengthVals = dict['StrengthVals']
+   #print(strengthVals)
+   #print('name is' + dict['Name'])
    c.close()                # Close the connection
