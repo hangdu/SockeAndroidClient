@@ -23,11 +23,13 @@ public class Client extends AsyncTask<Void, Void, String> {
     int dstPort;
     String response = "";
     TextView textResponse;
+    FingerPrint fingerPrint;
 
-    Client(String addr, int port, TextView textResponse) {
+    Client(FingerPrint fingerPrint, String addr, int port, TextView textResponse) {
         dstAddress = addr;
         dstPort = port;
         this.textResponse = textResponse;
+        this.fingerPrint = fingerPrint;
     }
 
     @Override
@@ -51,29 +53,13 @@ public class Client extends AsyncTask<Void, Void, String> {
 //                byteArrayOutputStream.write(buffer, 0, bytesRead);
 //                response += byteArrayOutputStream.toString("UTF-8");
 //            }
-
-
             //send something here
             Gson gson = new Gson();
-
-            String position = "bedroom";
-            List<Integer> list = new ArrayList<>();
-            list.add(33);
-            list.add(35);
-            list.add(34);
-
-            FingerPrint fingerPrint = new FingerPrint(position, list);
             String s = gson.toJson(fingerPrint);
-//            String s = "test";
             DataOutputStream dataOutputStream = new DataOutputStream(socket.getOutputStream());
-            if (dataOutputStream == null) {
-                System.out.print("out is null");
-            }
             dataOutputStream.writeUTF(s);
             dataOutputStream.flush();
             dataOutputStream.close();
-
-
         } catch (UnknownHostException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();

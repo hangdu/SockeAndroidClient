@@ -18,11 +18,18 @@
         android:hint="Server port number" />
 
     <Button
-        android:id="@+id/connectButton"
+        android:id="@+id/finger1Button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="Connect..." />
+        android:text="Send fingerprint1" />
+
+    <Button
+        android:id="@+id/finger2Button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Send fingerprint2" />
 
     <Button
         android:id="@+id/clearButton"

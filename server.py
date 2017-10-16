@@ -3,7 +3,7 @@ import json
 
 s = socket.socket()         # Create a socket object
 #host = socket.gethostname() # Get local machine name
-host = "192.168.1.109"
+host = "192.168.0.9"
 port = 12345                # Reserve a port for your service.
 s.bind((host, port))        # Bind to the port
 
